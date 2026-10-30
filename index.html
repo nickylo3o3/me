@@ -4,75 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nicky Lo | Senior Infrastructure & Network Engineer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.3.5/tailwind.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0b0f19;
-            color: #94a3b8;
-        }
-        .code-font {
-            font-family: 'Fira Code', monospace;
-        }
-        .glow-border {
-            box-shadow: 0 0 20px -5px rgba(56, 189, 248, 0.15);
-        }
-        .glow-border:hover {
-            box-shadow: 0 0 25px -2px rgba(56, 189, 248, 0.3);
+        *, ::before, ::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e2e8f0; }
+        html { line-height: 1.5; -webkit-text-size-adjust: 100%; font-family: 'Inter', sans-serif; background-color: #0b0f19; color: #94a3b8; }
+        body { margin: 0; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .glow-border { box-shadow: 0 0 20px -5px rgba(56, 189, 248, 0.15); }
+        .glow-border:hover { box-shadow: 0 0 25px -2px rgba(56, 189, 248, 0.3); }
+        .container { max-width: 72rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        .space-x-3 > * + * { margin-left: 0.75rem; }
+        .space-x-4 > * + * { margin-left: 1rem; }
+        .space-x-6 > * + * { margin-left: 1.5rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+        .space-y-12 > * + * { margin-top: 3rem; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-6 { gap: 1.5rem; gap-row: 1.5rem; gap-column: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+        .gap-12 { gap: 3rem; }
+        .bg-slate-950 { background-color: #020617; }
+        .bg-slate-900 { background-color: #0f172a; }
+        .bg-slate-900\/80 { background-color: rgba(15, 23, 42, 0.8); }
+        .bg-slate-900\/50 { background-color: rgba(15, 23, 42, 0.5); }
+        .bg-sky-500 { background-color: #0ea5e9; }
+        .bg-sky-950 { background-color: #082f49; }
+        .text-white { color: #fff; }
+        .text-slate-300 { color: #cbd5e1; }
+        .text-slate-400 { color: #94a3b8; }
+        .text-slate-500 { color: #64748b; }
+        .text-sky-400 { color: #38bdf8; }
+        .text-sky-300 { color: #7dd3fc; }
+        .text-emerald-400 { color: #34d399; }
+        .text-amber-400 { color: #fbbf24; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+        .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .p-5 { padding: 1.25rem; }
+        .p-6 { padding: 1.5rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+        .pt-2 { padding-top: 0.5rem; }
+        .pt-20 { padding-top: 5rem; }
+        .pb-16 { padding-bottom: 4rem; }
+        .rounded { border-radius: 0.25rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-full { border-radius: 9999px; }
+        .border { border-width: 1px; }
+        .border-t { border-top-width: 1px; }
+        .border-b { border-bottom-width: 1px; }
+        .border-l-2 { border-left-width: 2px; }
+        .border-slate-800 { border-color: #1e293b; }
+        .border-sky-800 { border-color: #0369a1; }
+        .sticky { position: sticky; }
+        .top-0 { top: 0px; }
+        .z-50 { z-index: 50; }
+        .overflow-hidden { overflow: hidden; }
+        .list-disc { list-style-type: disc; }
+        .list-inside { list-style-position: inside; }
+        .uppercase { text-transform: uppercase; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .tracking-tight { letter-spacing: -0.025em; }
+        .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        a { color: inherit; text-decoration: none; }
+        a:hover { color: #38bdf8; }
+        @media (min-width: 768px) {
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .md\:grid-cols-7 { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+            .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            .md\:col-span-5 { grid-column: span 5 / span 5; }
+            .md\:col-span-7 { grid-column: span 7 / span 7; }
+            .md\:flex { display: flex; }
+            .md\:pt-32 { padding-top: 8rem; }
+            .md\:pb-24 { padding-bottom: 6rem; }
+            .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+            .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+            .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
         }
     </style>
 </head>
-<body class="bg-[#0b0f19] text-slate-300 antialiased selection:bg-sky-500 selection:text-white">
+<body class="bg-[#0b0f19] text-slate-300 antialiased">
 
     <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0b0f19]/80 border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <header class="sticky top-0 z-50 bg-[#0b0f19]/90 border-b border-slate-800">
+        <div class="container h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <span class="code-font text-sky-400 font-bold text-lg">&gt; nicky_lo</span>
-                <span class="hidden sm:inline-block text-xs code-font px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">prod</span>
+                <span class="text-xs code-font px-2 py-1 rounded bg-sky-950 text-sky-300 border border-sky-800">prod</span>
             </div>
             <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-                <a href="#about" class="hover:text-sky-400 transition">About</a>
-                <a href="#experience" class="hover:text-sky-400 transition">Experience</a>
-                <a href="#projects" class="hover:text-sky-400 transition">Projects</a>
-                <a href="#skills" class="hover:text-sky-400 transition">Skills</a>
-                <a href="#contact" class="hover:text-sky-400 transition">Contact</a>
+                <a href="#about" class="transition">About</a>
+                <a href="#experience" class="transition">Experience</a>
+                <a href="#projects" class="transition">Projects</a>
+                <a href="#skills" class="transition">Skills</a>
+                <a href="#contact" class="transition">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="https://ca.linkedin.com/in/nickylokinsan/" target="_blank" class="text-slate-400 hover:text-sky-400 transition text-lg">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:meisnickylo@hotmail.com" class="text-slate-400 hover:text-sky-400 transition text-lg">
-                    <i class="fas fa-envelope"></i>
-                </a>
+                <a href="https://ca.linkedin.com/in/nickylokinsan/" target="_blank" class="text-slate-400 hover:text-sky-400 text-lg"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:meisnickylo@hotmail.com" class="text-slate-400 hover:text-sky-400 text-lg"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-6 pt-20 pb-16 md:pt-32 md:pb-24">
+    <section class="container pt-20 pb-16 md:pt-32 md:pb-24">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div class="md:col-span-7 space-y-6">
                 <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs code-font text-sky-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                     <span>Senior Infrastructure & Network Engineer</span>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight">
-                    Nicky Lo
-                </h1>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight">Nicky Lo</h1>
                 <p class="text-lg text-slate-400 leading-relaxed">
                     Over 10 years of global enterprise experience designing, modernizing, and securing mission-critical IT architectures. Specializing in core network switching, high-throughput NGFW migrations, and enterprise infrastructure security.
                 </p>
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#projects" class="px-6 py-3 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition shadow-lg shadow-sky-500/20 flex items-center space-x-2">
-                        <span>View Projects</span>
-                        <i class="fas fa-arrow-right text-xs"></i>
-                    </a>
-                    <a href="#contact" class="px-6 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition border border-slate-700">
-                        Get in Touch
-                    </a>
+                    <a href="#projects" class="px-6 py-3 rounded-lg bg-sky-500 text-slate-950 font-semibold shadow-lg">View Projects <i class="fas fa-arrow-right text-xs"></i></a>
+                    <a href="#contact" class="px-6 py-3 rounded-lg bg-slate-800 text-white border border-slate-700">Get in Touch</a>
                 </div>
             </div>
             
@@ -81,24 +150,23 @@
                 <div class="rounded-xl bg-slate-900/90 border border-slate-800 glow-border overflow-hidden">
                     <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
                         <div class="flex space-x-2">
-                            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
                         </div>
                         <span class="code-font text-xs text-slate-500">bash - nicky@richmond-core</span>
                     </div>
                     <div class="p-5 code-font text-xs space-y-3 text-slate-300">
                         <p><span class="text-sky-400">nicky@infra:~$</span> cat ./profile.json</p>
-                        <p class="text-slate-400 pl-4">{</p>
-                        <p class="text-slate-300 pl-8">"name": <span class="text-emerald-400">"Nicky Lo"</span>,</p>
-                        <p class="text-slate-300 pl-8">"role": <span class="text-emerald-400">"Senior Infrastructure & Network Engineer"</span>,</p>
-                        <p class="text-slate-300 pl-8">"location": <span class="text-emerald-400">"Richmond, BC, Canada"</span>,</p>
-                        <p class="text-slate-300 pl-8">"experience_years": <span class="text-amber-400">10</span>,</p>
-                        <p class="text-slate-300 pl-8">"core_mig_scope_usd": <span class="text-amber-400">"1.6M"</span>,</p>
-                        <p class="text-slate-300 pl-8">"vlans_managed": <span class="text-amber-400">"3000+"</span>,</p>
-                        <p class="text-slate-300 pl-8">"focus": [<span class="text-emerald-400">"Cisco Nexus"</span>, <span class="text-emerald-400">"Fortinet NGFW"</span>, <span class="text-emerald-400">"Automation"</span>]</p>
-                        <p class="text-slate-400 pl-4">}</p>
-                        <p class="pt-2"><span class="text-sky-400">nicky@infra:~$</span> <span class="inline-block w-2 h-4 bg-sky-400 animate-pulse align-middle"></span></p>
+                        <p class="text-slate-400">{</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"name": <span class="text-emerald-400">"Nicky Lo"</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"role": <span class="text-emerald-400">"Senior Infrastructure & Network Engineer"</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"location": <span class="text-emerald-400">"Richmond, BC, Canada"</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"experience_years": <span class="text-amber-400">10</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"core_mig_scope_usd": <span class="text-amber-400">"1.6M"</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"vlans_managed": <span class="text-amber-400">"3000+"</span>,</p>
+                        <p class="text-slate-300">&nbsp;&nbsp;"focus": [<span class="text-emerald-400">"Cisco Nexus"</span>, <span class="text-emerald-400">"Fortinet NGFW"</span>, <span class="text-emerald-400">"Automation"</span>]</p>
+                        <p class="text-slate-400">}</p>
                     </div>
                 </div>
             </div>
@@ -107,7 +175,7 @@
 
     <!-- Stats Bar -->
     <section class="border-y border-slate-800 bg-slate-900/50 py-8">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="container grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
                 <div class="text-3xl md:text-4xl font-extrabold text-white code-font">10+</div>
                 <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider">Years Global Experience</div>
@@ -128,256 +196,133 @@
     </section>
 
     <!-- About & Expertise -->
-    <section id="about" class="max-w-6xl mx-auto px-6 py-20">
+    <section id="about" class="container py-20">
         <div class="space-y-4 mb-12">
             <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Professional Overview</h2>
             <div class="w-12 h-1 bg-sky-500 rounded"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold">
-                    <i class="fas fa-network-wired"></i>
-                </div>
+                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fas fa-network-wired"></i></div>
                 <h3 class="text-lg font-semibold text-white">Network Modernization</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Expert in large-scale core switch migrations, transitioning legacy architectures to high-performance Cisco Nexus 9000 and Arista chassis for maximum backbone bandwidth and minimal latency.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed">Expert in large-scale core switch migrations, transitioning legacy architectures to high-performance Cisco Nexus 9000 and Arista chassis.</p>
             </div>
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
+                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fas fa-shield-alt"></i></div>
                 <h3 class="text-lg font-semibold text-white">Cybersecurity & NGFW</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Advanced proficiency in Fortinet, Check Point, Palo Alto, and Cisco Firepower. Experienced in policy automation with Tufin and comprehensive access control management via Cisco ISE.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed">Advanced proficiency in Fortinet, Check Point, Palo Alto, and Cisco Firepower, with policy automation via Tufin and Cisco ISE.</p>
             </div>
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold">
-                    <i class="fas fa-server"></i>
-                </div>
+                <div class="w-12 h-12 rounded-lg bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl font-bold"><i class="fas fa-server"></i></div>
                 <h3 class="text-lg font-semibold text-white">Systems & Operations</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Managing physical data center hardware, VMware ESXi virtual clusters, and robust event alert monitoring to guarantee high uptime for mission-critical logistics operations.
-                </p>
+                <p class="text-slate-400 text-sm leading-relaxed">Managing physical data center hardware, VMware ESXi virtual clusters, and robust event alert monitoring for logistics operations.</p>
             </div>
         </div>
     </section>
 
     <!-- Experience Timeline -->
-    <section id="experience" class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800">
+    <section id="experience" class="container py-20 border-t border-slate-800">
         <div class="space-y-4 mb-16">
             <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Professional Experience</h2>
             <div class="w-12 h-1 bg-sky-500 rounded"></div>
         </div>
-        
-        <div class="space-y-12 border-l-2 border-slate-800 ml-4 pl-6 md:pl-8">
-            <!-- ContainerWorld -->
+        <div class="space-y-12 border-l-2 border-slate-800 ml-4 pl-6">
             <div class="relative space-y-3">
-                <div class="absolute -left-[33px] md:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-sky-500 ring-4 ring-[#0b0f19]"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-sky-500"></div>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                     <h3 class="text-xl font-bold text-white">Infrastructure Technician</h3>
-                    <span class="text-xs code-font text-sky-400 bg-sky-950 px-3 py-1 rounded border border-sky-800 w-fit">May 2022 – Present</span>
+                    <span class="text-xs code-font text-sky-400 bg-sky-950 px-3 py-1 rounded border border-sky-800">May 2022 – Present</span>
                 </div>
                 <div class="text-sm font-medium text-slate-300">ContainerWorld Forwarding Services Inc. | Richmond, BC</div>
-                <ul class="list-disc list-inside space-y-2 text-slate-400 text-sm pt-2">
-                    <li>Spearheaded end-to-end core switch modernization from legacy Cisco Catalyst 4500 to high-performance Cisco Nexus 9000 architecture.</li>
-                    <li>Led migration from legacy Cisco Firepower appliances to high-throughput FortiGate 210G NGFW units, elevating threat visibility and inspection speeds.</li>
-                    <li>Managed physical infrastructure hardware and VMware ESXi virtual cluster application systems to maintain high uptime for mission-critical logistics.</li>
-                    <li>Implemented robust event alert management for hardware and virtualization environments for proactive incident response.</li>
+                <ul class="list-disc list-inside space-y-2 text-slate-400 text-sm">
+                    <li>Spearheaded core switch modernization from Cisco Catalyst 4500 to high-performance Cisco Nexus 9000 architecture.</li>
+                    <li>Led migration from Cisco Firepower appliances to high-throughput FortiGate 210G Next-Generation Firewalls.</li>
+                    <li>Managed physical infrastructure hardware and VMware ESXi virtual cluster application systems for logistics.</li>
                 </ul>
             </div>
-
-            <!-- Hutchison Telecom -->
             <div class="relative space-y-3">
-                <div class="absolute -left-[33px] md:-left-[41px] top-1.5 w-4 h-4 rounded-full bg-slate-700 ring-4 ring-[#0b0f19]"></div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-700"></div>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                     <h3 class="text-xl font-bold text-white">Network Engineer</h3>
-                    <span class="text-xs code-font text-slate-400 bg-slate-900 px-3 py-1 rounded border border-slate-800 w-fit">Oct 2018 – Mar 2022</span>
+                    <span class="text-xs code-font text-slate-400 bg-slate-900 px-3 py-1 rounded border border-slate-800">Oct 2018 – Mar 2022</span>
                 </div>
                 <div class="text-sm font-medium text-slate-300">Hutchison Telecommunications (HK) Limited | Tsing Yi, HK</div>
-                <ul class="list-disc list-inside space-y-2 text-slate-400 text-sm pt-2">
-                    <li>Directed 3 cross-functional teams and 3 vendors (20 total personnel) in executing a $1.6M USD migration of Cisco Nexus 7000 cores to Arista 7504 chassis.</li>
-                    <li>Managed over 50 enterprise firewalls and 400 security appliances, safeguarding 3,000+ VLANs across internal and mobile network cores.</li>
-                    <li>Orchestrated the Tufin T-510 Firewall Automation project to streamline security policy workflows.</li>
-                    <li>Executed seamless migrations from Cisco ACS to Cisco ISE and upgraded border routers to Arista 7050X3 series.</li>
+                <ul class="list-disc list-inside space-y-2 text-slate-400 text-sm">
+                    <li>Directed teams and vendors in executing a $1.6M USD migration of Cisco Nexus 7000 cores to Arista 7504 chassis.</li>
+                    <li>Managed 50+ enterprise firewalls and 400 security appliances, safeguarding 3,000+ VLANs.</li>
+                    <li>Orchestrated Tufin T-510 Firewall Automation and migrated from Cisco ACS to Cisco ISE.</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800">
+    <section id="projects" class="container py-20 border-t border-slate-800">
         <div class="space-y-4 mb-12">
             <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Key Infrastructure Projects</h2>
             <div class="w-12 h-1 bg-sky-500 rounded"></div>
         </div>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs code-font text-sky-400 bg-sky-950 px-2.5 py-1 rounded border border-sky-800">ContainerWorld</span>
-                    <i class="fas fa-server text-slate-600"></i>
-                </div>
+                <span class="text-xs code-font text-sky-400 bg-sky-950 px-2.5 py-1 rounded border border-sky-800">ContainerWorld</span>
                 <h3 class="text-xl font-bold text-white">Cisco Nexus 9000 Core Migration</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    End-to-end upgrade replacing legacy Catalyst 4500 core switches with high-density Cisco Nexus 9000 architecture, delivering increased backbone bandwidth and reduced latency for warehouse data center systems.
-                </p>
+                <p class="text-slate-400 text-sm">End-to-end upgrade replacing legacy Catalyst 4500 core switches with high-density Cisco Nexus 9000 architecture.</p>
             </div>
-
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs code-font text-sky-400 bg-sky-950 px-2.5 py-1 rounded border border-sky-800">ContainerWorld</span>
-                    <i class="fas fa-shield-alt text-slate-600"></i>
-                </div>
+                <span class="text-xs code-font text-sky-400 bg-sky-950 px-2.5 py-1 rounded border border-sky-800">ContainerWorld</span>
                 <h3 class="text-xl font-bold text-white">FortiGate 210G NGFW Deployment</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Architected and executed the security transition from Cisco Firepower to FortiGate 210G Next-Generation Firewalls, significantly improving deep packet inspection throughput and enterprise threat response.
-                </p>
+                <p class="text-slate-400 text-sm">Architected and executed security transition from Cisco Firepower to FortiGate 210G Next-Generation Firewalls.</p>
             </div>
-
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs code-font text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">Hutchison Telecom</span>
-                    <i class="fas fa-network-wired text-slate-600"></i>
-                </div>
+                <span class="text-xs code-font text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">Hutchison Telecom</span>
                 <h3 class="text-xl font-bold text-white">$1.6M Core Switch & Arista Migration</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Led 20 team members across 3 vendors to migrate Cisco Nexus 7000 core switches to Arista 7504 chassis while maintaining continuous uptime across 3,000+ active VLANs.
-                </p>
+                <p class="text-slate-400 text-sm">Led 20 team members across 3 vendors to migrate Cisco Nexus 7000 core switches to Arista 7504 chassis.</p>
             </div>
-
             <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs code-font text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">Hutchison Telecom</span>
-                    <i class="fas fa-robot text-slate-600"></i>
-                </div>
+                <span class="text-xs code-font text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800">Hutchison Telecom</span>
                 <h3 class="text-xl font-bold text-white">Tufin T-510 Firewall Automation</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Orchestrated firewall policy automation across 50+ enterprise firewalls and 400 security devices using Tufin T-510 to streamline compliance and change-management workflows.
-                </p>
+                <p class="text-slate-400 text-sm">Orchestrated firewall policy automation across 50+ enterprise firewalls and 400 security devices.</p>
             </div>
         </div>
     </section>
 
     <!-- Skills Matrix -->
-    <section id="skills" class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800">
+    <section id="skills" class="container py-20 border-t border-slate-800">
         <div class="space-y-4 mb-12">
             <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Technical Skills Matrix</h2>
             <div class="w-12 h-1 bg-sky-500 rounded"></div>
         </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <div class="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
-                <h4 class="text-sm font-bold text-sky-400 uppercase tracking-wider code-font">Hardware & Switching</h4>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Cisco Nexus (7K/9K)</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Arista (7504/7050X)</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Cisco Catalyst 4500</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Juniper</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">H3C</span>
-                </div>
+                <h4 class="text-sm font-bold text-sky-400 code-font">Hardware & Switching</h4>
+                <p class="text-xs text-slate-300">Cisco Nexus (7K/9K), Arista (7504/7050X), Catalyst 4500, Juniper, H3C</p>
             </div>
-
             <div class="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
-                <h4 class="text-sm font-bold text-sky-400 uppercase tracking-wider code-font">Cybersecurity & Firewalls</h4>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Fortinet (NSE 3)</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Check Point (VSX/MDM)</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Palo Alto</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Cisco Firepower</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Tufin Automation</span>
-                </div>
+                <h4 class="text-sm font-bold text-sky-400 code-font">Cybersecurity & Firewalls</h4>
+                <p class="text-xs text-slate-300">Fortinet (NSE 3), Check Point (VSX/MDM), Palo Alto, Cisco Firepower, Tufin</p>
             </div>
-
             <div class="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
-                <h4 class="text-sm font-bold text-sky-400 uppercase tracking-wider code-font">Identity & Cloud</h4>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Cisco ISE / ACS</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Microsoft Entra ID</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">AWS (Solutions Architect)</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Azure & O365</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Cloudflare</span>
-                </div>
+                <h4 class="text-sm font-bold text-sky-400 code-font">Identity & Cloud</h4>
+                <p class="text-xs text-slate-300">Cisco ISE / ACS, Entra ID, AWS Solutions Architect, Azure, Cloudflare</p>
             </div>
-
             <div class="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-3">
-                <h4 class="text-sm font-bold text-sky-400 uppercase tracking-wider code-font">Virtualization & Scripting</h4>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">VMware ESXi</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Zerto DR</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">Python</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">PowerShell</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded">SQL</span>
-                </div>
+                <h4 class="text-sm font-bold text-sky-400 code-font">Virtualization & Scripting</h4>
+                <p class="text-xs text-slate-300">VMware ESXi, Zerto DR, Python, PowerShell, SQL</p>
             </div>
         </div>
     </section>
 
-    <!-- Education & Certifications -->
-    <section class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-800">
-        <div class="space-y-4 mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Education & Certifications</h2>
-            <div class="w-12 h-1 bg-sky-500 rounded"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <h3 class="text-lg font-bold text-white flex items-center space-x-2">
-                    <i class="fas fa-graduation-cap text-sky-400"></i>
-                    <span>Academic Degrees</span>
-                </h3>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="border-b border-slate-800 pb-3">
-                        <div class="font-semibold text-white">Master of Science in Information Technology</div>
-                        <div class="text-slate-400 text-xs mt-0.5">University of the People, US</div>
-                    </li>
-                    <li>
-                        <div class="font-semibold text-white">Bachelor of Science (Honors) in Information Technology</div>
-                        <div class="text-slate-400 text-xs mt-0.5">Middlesex University, UK</div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="p-6 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
-                <h3 class="text-lg font-bold text-white flex items-center space-x-2">
-                    <i class="fas fa-award text-sky-400"></i>
-                    <span>Professional Certifications</span>
-                </h3>
-                <div class="flex flex-wrap gap-2 pt-1">
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">CCNP Enterprise</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">CCNA</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">EC-Council C|EH Master</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">AWS Solutions Architect Assoc.</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">Fortinet NSE 3</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">Zerto Certified</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">JNCIA-Junos</span>
-                    <span class="text-xs code-font bg-sky-950 text-sky-300 border border-sky-800 px-3 py-1.5 rounded">ITIL v3 Foundation</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Contact -->
+    <!-- Footer -->
     <footer id="contact" class="border-t border-slate-800 bg-slate-950 py-12">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="container flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
                 <div class="code-font text-sky-400 font-bold text-lg">&gt; nicky_lo</div>
                 <p class="text-slate-400 text-sm mt-1">Senior Infrastructure & Network Engineer • Richmond, BC</p>
             </div>
             <div class="flex items-center space-x-6 text-sm">
-                <a href="mailto:meisnickylo@hotmail.com" class="hover:text-sky-400 transition flex items-center space-x-2">
-                    <i class="fas fa-envelope text-sky-400"></i>
-                    <span>meisnickylo@hotmail.com</span>
-                </a>
-                <a href="tel:6043399420" class="hover:text-sky-400 transition flex items-center space-x-2">
-                    <i class="fas fa-phone text-sky-400"></i>
-                    <span>(604) 339-9420</span>
-                </a>
-                <a href="https://ca.linkedin.com/in/nickylokinsan/" target="_blank" class="hover:text-sky-400 transition flex items-center space-x-2">
-                    <i class="fab fa-linkedin text-sky-400"></i>
-                    <span>LinkedIn</span>
-                </a>
+                <a href="mailto:meisnickylo@hotmail.com" class="flex items-center space-x-2"><i class="fas fa-envelope text-sky-400"></i> <span>meisnickylo@hotmail.com</span></a>
+                <a href="tel:6043399420" class="flex items-center space-x-2"><i class="fas fa-phone text-sky-400"></i> <span>(604) 339-9420</span></a>
+                <a href="https://ca.linkedin.com/in/nickylokinsan/" target="_blank" class="flex items-center space-x-2"><i class="fab fa-linkedin text-sky-400"></i> <span>LinkedIn</span></a>
             </div>
         </div>
     </footer>
